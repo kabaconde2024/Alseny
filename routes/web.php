@@ -23,6 +23,20 @@ use App\Http\Controllers\Membre\NotificationController;
 use App\Http\Controllers\Admin\GalerieController;
 use App\Http\Controllers\Admin\AdminUserController;
 
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-mail', function () {
+    try {
+        Mail::raw('Ceci est un test de Brevo sur Render !', function ($message) {
+            $message->to('kabaconde5259@gmail.com') // Ton mail perso pour le test
+                    ->subject('Test SMTP Brevo');
+        });
+        return "L'email a été envoyé avec succès !";
+    } catch (\Exception $e) {
+        return "Erreur d'envoi : " . $e->getMessage();
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Routes publiques (vitrine)
